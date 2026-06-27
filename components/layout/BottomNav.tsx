@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils/cn";
 
 // Show the five most important destinations on mobile.
 const MOBILE_ITEMS = NAV_ITEMS.filter((i) =>
-  ["/dashboard", "/journal", "/timeline", "/analytics", "/profile"].includes(i.href),
+  ["/dashboard", "/journal", "/books", "/analytics", "/profile"].includes(i.href),
 );
 
 export function BottomNav() {

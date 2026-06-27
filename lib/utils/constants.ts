@@ -80,9 +80,26 @@ export const GOAL_STATUS_LABELS: Record<GoalStatus, string> = {
   abandoned: "Заброшена",
 };
 
+import type { BookStatus } from "@/types";
+
+export const BOOK_STATUS_LABELS: Record<BookStatus, string> = {
+  want_to_read: "Хочу прочитать",
+  reading: "Читаю",
+  read: "Прочитано",
+};
+
+export const BOOK_STATUS_COLORS: Record<BookStatus, string> = {
+  want_to_read: "#a855f7",
+  reading: "#f59e0b",
+  read: "#22c55e",
+};
+
+export const BOOK_STATUSES: BookStatus[] = ["want_to_read", "reading", "read"];
+
 export const NAV_ITEMS = [
   { href: "/dashboard", label: "Дашборд", icon: "LayoutDashboard" },
   { href: "/journal", label: "Журнал", icon: "BookOpen" },
+  { href: "/books", label: "Книги", icon: "Library" },
   { href: "/timeline", label: "Таймлайн", icon: "GitCommitVertical" },
   { href: "/goals", label: "Цели", icon: "Target" },
   { href: "/analytics", label: "Аналитика", icon: "BarChart3" },
