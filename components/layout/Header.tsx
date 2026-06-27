@@ -19,7 +19,9 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur md:px-8">
-      <div className="md:hidden flex items-center gap-2 font-semibold">Abdillamit Life</div>
+      <div className="md:hidden flex items-center gap-2 font-semibold">
+        {profile?.name ? `${profile.name.split(" ")[0]} Life` : "Life"}
+      </div>
 
       <div className="ml-auto flex items-center gap-3">
         <Link href="/journal/new" className="hidden md:block">

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils/cn";
-import { TAG_COLORS, TAG_LABELS } from "@/lib/utils/constants";
+import { tagColor, TAG_LABELS } from "@/lib/utils/constants";
 
 export function Badge({
   className,
@@ -22,7 +22,6 @@ export function Badge({
   );
 }
 
-export function TagBadge({ tag }: { tag: string }) {
-  const color = TAG_COLORS[tag] ?? "#9b9ba4";
-  return <Badge color={color}>{TAG_LABELS[tag] ?? tag}</Badge>;
+export function TagBadge({ tag, color }: { tag: string; color?: string | null }) {
+  return <Badge color={tagColor(tag, color)}>{TAG_LABELS[tag] ?? tag}</Badge>;
 }

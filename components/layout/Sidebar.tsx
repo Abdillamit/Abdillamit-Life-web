@@ -5,10 +5,13 @@ import { usePathname } from "next/navigation";
 import { Sparkles } from "lucide-react";
 import { NAV_ITEMS } from "@/lib/utils/constants";
 import { NAV_ICONS } from "./navIcons";
+import { useProfile } from "@/lib/hooks/useProfile";
 import { cn } from "@/lib/utils/cn";
 
 export function Sidebar() {
   const pathname = usePathname();
+  const { profile } = useProfile();
+  const firstName = profile?.name?.split(" ")[0];
 
   return (
     <aside className="hidden md:flex md:w-60 md:flex-col md:border-r md:border-border md:bg-surface/40">
@@ -16,7 +19,7 @@ export function Sidebar() {
         <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-black">
           <Sparkles className="h-5 w-5" />
         </span>
-        <span className="text-base font-semibold">Abdillamit Life</span>
+        <span className="text-base font-semibold">{firstName ? `${firstName} Life` : "Life"}</span>
       </div>
 
       <nav className="flex-1 space-y-1 px-3 py-4">
@@ -41,7 +44,9 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="px-6 py-4 text-xs text-muted">v0.1 · Bishkek</div>
+      <div className="px-6 py-4 text-xs text-muted">
+        v0.1{profile?.location ? ` · ${profile.location}` : ""}
+      </div>
     </aside>
   );
 }

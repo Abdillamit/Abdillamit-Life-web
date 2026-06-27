@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Abdillamit Life",
+  title: "Life — личный дневник",
   description: "Персональная life-logging платформа — твой цифровой двойник.",
   manifest: "/manifest.json",
   appleWebApp: {

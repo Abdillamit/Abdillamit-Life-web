@@ -9,12 +9,13 @@ import { PageHeader } from "@/components/shared/PageHeader";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { PageLoader } from "@/components/shared/LoadingSpinner";
 import { Button } from "@/components/ui/Button";
-import { TAGS, TAG_LABELS } from "@/lib/utils/constants";
+import { useTags } from "@/lib/hooks/useTags";
 import { cn } from "@/lib/utils/cn";
 
 export default function JournalPage() {
   const [filters, setFilters] = useState<EntryFilters>({});
   const { entries, loading, error, hasMore, loadMore, loadingMore } = useEntries(filters);
+  const { tags: userTags } = useTags();
 
   function toggleTag(tag: string) {
     setFilters((f) => ({ ...f, tag: f.tag === tag ? undefined : tag }));
@@ -34,22 +35,24 @@ export default function JournalPage() {
         }
       />
 
-      <div className="mb-5 flex flex-wrap gap-2">
-        {TAGS.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => toggleTag(tag)}
-            className={cn(
-              "rounded-full border px-3 py-1 text-xs transition-colors",
-              filters.tag === tag
-                ? "border-accent bg-accent/15 text-accent"
-                : "border-border bg-surface-2 text-muted hover:text-foreground",
-            )}
-          >
-            {TAG_LABELS[tag]}
-          </button>
-        ))}
-      </div>
+      {userTags.length > 0 && (
+        <div className="mb-5 flex flex-wrap gap-2">
+          {userTags.map((tag) => (
+            <button
+              key={tag.id}
+              onClick={() => toggleTag(tag.name)}
+              className={cn(
+                "rounded-full border px-3 py-1 text-xs transition-colors",
+                filters.tag === tag.name
+                  ? "border-accent bg-accent/15 text-accent"
+                  : "border-border bg-surface-2 text-muted hover:text-foreground",
+              )}
+            >
+              {tag.name}
+            </button>
+          ))}
+        </div>
+      )}
 
       {loading ? (
         <PageLoader />

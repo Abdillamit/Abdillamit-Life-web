@@ -1,6 +1,6 @@
 {
-  "name": "Abdillamit Life",
-  "short_name": "ALife",
+  "name": "Life — личный дневник",
+  "short_name": "Life",
   "description": "Personal life-logging platform",
   "start_url": "/dashboard",
   "scope": "/",

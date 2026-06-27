@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input, Label, Textarea } from "@/components/ui/Input";
 import { PhotoUpload } from "@/components/shared/PhotoUpload";
+import { TagManager } from "@/components/profile/TagManager";
 import { StatCard } from "@/components/dashboard/StreakWidget";
 import { daysAlive, lifePercent } from "@/lib/utils/dates";
 
@@ -119,6 +120,8 @@ export default function ProfilePage() {
           </div>
         </form>
       </Card>
+
+      <TagManager />
     </div>
   );
 }

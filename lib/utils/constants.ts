@@ -32,6 +32,20 @@ export const TAG_COLORS: Record<string, string> = {
   social: "#ef4444",
 };
 
+/**
+ * Stable color for a tag name when no explicit color is known (e.g. on cards
+ * that don't have the user's tag list loaded). Legacy keys keep their colors;
+ * everything else maps deterministically to a pleasant hue.
+ */
+export function tagColor(name: string, explicit?: string | null): string {
+  if (explicit) return explicit;
+  if (TAG_COLORS[name]) return TAG_COLORS[name];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  const hue = Math.abs(hash) % 360;
+  return `hsl(${hue} 65% 55%)`;
+}
+
 export const MOODS: { value: number; emoji: string; label: string }[] = [
   { value: 1, emoji: "😢", label: "Ужасно" },
   { value: 2, emoji: "😞", label: "Плохо" },

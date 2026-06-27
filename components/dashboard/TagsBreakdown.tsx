@@ -3,13 +3,13 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/shared/EmptyState";
-import { TAG_COLORS, TAG_LABELS } from "@/lib/utils/constants";
+import { tagColor } from "@/lib/utils/constants";
 
 export function TagsBreakdown({ tags }: { tags: { tag: string; count: number }[] }) {
   const data = tags.map((t) => ({
-    name: TAG_LABELS[t.tag] ?? t.tag,
+    name: t.tag,
     value: t.count,
-    color: TAG_COLORS[t.tag] ?? "#9b9ba4",
+    color: tagColor(t.tag),
   }));
 
   return (
