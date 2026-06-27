@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { TagBadge } from "@/components/ui/Badge";
 import { moodEmoji } from "@/lib/utils/constants";
 import { formatDate } from "@/lib/utils/dates";
@@ -21,6 +22,21 @@ export function EntryCard({ entry }: { entry: Entry }) {
       </div>
 
       <p className="whitespace-pre-wrap text-sm leading-relaxed text-foreground/90">{preview}</p>
+
+      {entry.photos.length > 0 && (
+        <div className="mt-3 flex gap-1.5">
+          {entry.photos.slice(0, 4).map((url) => (
+            <div key={url} className="relative h-14 w-14 overflow-hidden rounded-lg">
+              <Image src={url} alt="" fill className="object-cover" sizes="56px" />
+            </div>
+          ))}
+          {entry.photos.length > 4 && (
+            <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-surface-2 text-xs text-muted">
+              +{entry.photos.length - 4}
+            </div>
+          )}
+        </div>
+      )}
 
       {entry.tags.length > 0 && (
         <div className="mt-3 flex flex-wrap gap-1.5">

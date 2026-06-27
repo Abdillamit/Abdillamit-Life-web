@@ -8,6 +8,7 @@ import { ActivityHeatmap } from "@/components/dashboard/ActivityHeatmap";
 import { MoodChart } from "@/components/dashboard/MoodChart";
 import { TagsBreakdown } from "@/components/dashboard/TagsBreakdown";
 import { RecentEntries } from "@/components/dashboard/RecentEntries";
+import { ReadingWidget } from "@/components/dashboard/ReadingWidget";
 import { PageLoader } from "@/components/shared/LoadingSpinner";
 
 export default function DashboardPage() {
@@ -52,6 +53,8 @@ export default function DashboardPage() {
         <MoodChart data={mood} />
         <TagsBreakdown tags={summary.top_tags} />
       </div>
+
+      <ReadingWidget />
 
       <RecentEntries />
     </div>

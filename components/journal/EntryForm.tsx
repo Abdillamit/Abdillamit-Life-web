@@ -6,19 +6,23 @@ import { Button } from "@/components/ui/Button";
 import { Input, Label, Textarea } from "@/components/ui/Input";
 import Link from "next/link";
 import { MoodPicker } from "./MoodPicker";
+import { EntryPhotos } from "./EntryPhotos";
 import { tagColor } from "@/lib/utils/constants";
 import { todayISO } from "@/lib/utils/dates";
 import { cn } from "@/lib/utils/cn";
 import { createEntry, updateEntry } from "@/lib/hooks/useEntries";
 import { useTags } from "@/lib/hooks/useTags";
+import { useAuth } from "@/lib/hooks/useAuth";
 import type { Entry } from "@/types";
 
 export function EntryForm({ entry }: { entry?: Entry }) {
   const router = useRouter();
   const { tags: userTags } = useTags();
+  const { user } = useAuth();
   const [content, setContent] = useState(entry?.content ?? "");
   const [mood, setMood] = useState<number | null>(entry?.mood ?? null);
   const [tags, setTags] = useState<string[]>(entry?.tags ?? []);
+  const [photos, setPhotos] = useState<string[]>(entry?.photos ?? []);
   const [date, setDate] = useState(entry?.date ?? todayISO());
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -36,7 +40,7 @@ export function EntryForm({ entry }: { entry?: Entry }) {
     setSaving(true);
     setError(null);
     try {
-      const payload = { content: content.trim(), mood, tags, date };
+      const payload = { content: content.trim(), mood, tags, photos, date };
       const saved = entry
         ? await updateEntry(entry.id, payload)
         : await createEntry(payload);
@@ -75,6 +79,15 @@ export function EntryForm({ entry }: { entry?: Entry }) {
       </div>
 
       <MoodPicker value={mood} onChange={setMood} />
+
+      <div>
+        <Label>Фото</Label>
+        {user ? (
+          <EntryPhotos value={photos} onChange={setPhotos} userId={user.id} />
+        ) : (
+          <p className="text-sm text-muted">…</p>
+        )}
+      </div>
 
       <div>
         <div className="mb-1.5 flex items-center justify-between">

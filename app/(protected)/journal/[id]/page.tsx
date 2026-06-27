@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { Pencil, Trash2 } from "lucide-react";
+import { Markdown } from "@/components/shared/Markdown";
 import { getEntry, deleteEntry } from "@/lib/hooks/useEntries";
 import { EntryForm } from "@/components/journal/EntryForm";
 import { PageHeader } from "@/components/shared/PageHeader";
@@ -76,9 +78,23 @@ export default function EntryDetailPage() {
         )}
       </div>
 
-      <p className="whitespace-pre-wrap text-base leading-relaxed text-foreground/90">
-        {entry.content}
-      </p>
+      <Markdown>{entry.content}</Markdown>
+
+      {entry.photos.length > 0 && (
+        <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
+          {entry.photos.map((url) => (
+            <a
+              key={url}
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+              className="relative aspect-square overflow-hidden rounded-xl border border-border"
+            >
+              <Image src={url} alt="Фото записи" fill className="object-cover" sizes="200px" />
+            </a>
+          ))}
+        </div>
+      )}
 
       {entry.tags.length > 0 && (
         <div className="mt-5 flex flex-wrap gap-1.5">
