@@ -59,3 +59,15 @@ named `avatars`.
 - `npm run dev` — dev server
 - `npm run build` — production build
 - `npm run typecheck` — type-check only
+
+## Deploy (Vercel)
+
+1. Vercel → **Add New → Project** → import this GitHub repo (framework auto-detected: Next.js).
+2. `.npmrc` enables `legacy-peer-deps`, so the default `npm install` works.
+3. Add Environment Variables (Production + Preview):
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `NEXT_PUBLIC_API_URL` → the Render backend URL (e.g. `https://abdillamit-life-back.onrender.com`)
+4. Deploy. Then add the resulting Vercel URL to the backend's `CORS_ORIGIN`
+   and to Supabase **Authentication → URL Configuration** (Site URL + redirect
+   `https://<vercel-url>/auth/callback`).
